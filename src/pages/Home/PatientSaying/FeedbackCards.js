@@ -41,7 +41,7 @@ const FeedbackCards = () => {
             <div className='flex justify-between'>
                 <div className='mt-24'>
                     <p className='text-2xl text-primary mb-2'>Testimonials</p>
-                    <h1 className='text-5xl'>What Our Patients Says</h1>
+                    <h1 className='text-5xl'>What Our Patients Say</h1>
                 </div>
 
                 <div className='mt-24'>

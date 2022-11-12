@@ -27,7 +27,7 @@ const InfoCards = () => {
 
         {
             id: 3,
-            name: 'Contact Us',
+            name: 'Contact Us Now',
             description : 'Open 9 AM to 5 PM everyday',
             icon: phone,
             bgClass: 'bg-gradient-to-r from-primary to-secondary'
