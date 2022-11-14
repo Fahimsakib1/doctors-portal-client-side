@@ -8,7 +8,7 @@ const AppointmentOption = ({ appointmentOption, setTreatment }) => {
 
     return (
         <div className='mt-24'>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl mx-auto dark:bg-gray-800">
                 <div className="card-body">
                     
                     <h2 className="text-primary font-semibold text-center text-2xl">{name}</h2>
@@ -22,7 +22,7 @@ const AppointmentOption = ({ appointmentOption, setTreatment }) => {
                         <label 
                         disabled = {slots.length === 0}
                         onClick={() => setTreatment(appointmentOption)}
-                        htmlFor="booking-modal" className='btn btn-primary text-white'>Book Appointment</label>
+                        htmlFor="booking-modal" className='btn btn-primary text-white dark:bg-black'>Book Appointment</label>
                     </div>
                 </div>
             </div>

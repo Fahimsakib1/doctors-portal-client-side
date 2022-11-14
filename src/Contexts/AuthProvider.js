@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import app from '../Firebase/Firebase.config';
 
 
@@ -42,6 +42,43 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, providerGoogle);
     }
 
+    const resetPassword = (email) => {
+        setLoading(true);
+        return sendPasswordResetEmail(auth, email);
+
+    }
+
+    //code for toggle theme
+    const [theme, setTheme] = useState("Light");
+
+    useEffect( () => {
+        if(theme === "dark"){
+            document.documentElement.classList.add("dark")
+        }
+        else{
+            document.documentElement.classList.remove("dark")
+        }
+    }, [theme])
+
+    const ThemeChange = () => {
+        setTheme(theme === "dark" ? "Light" : "dark")
+    }
+
+
+
+    const handleThemeSwitch = () => {
+        ThemeChange()
+    }
+
+
+
+
+
+
+
+
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log("Current User From Auth Provider", currentUser);
@@ -52,7 +89,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const AuthInfo = { user, loading, setLoading, createUser, userLogin, signOutUser, updateUser, googleSignIn }
+    const AuthInfo = { user, loading, setLoading, createUser, userLogin, signOutUser, updateUser, googleSignIn, resetPassword, theme, ThemeChange, handleThemeSwitch }
 
     return (
         <AuthContext.Provider value={AuthInfo}>

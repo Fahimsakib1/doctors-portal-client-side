@@ -83,18 +83,18 @@ const Signup = () => {
 
     return (
         <div className='mt-8 flex justify-center items-center'>
-            <div className='w-96 p-6 border-2 rounded-xl'>
+            <div className='w-96 p-6 border-2 rounded-xl dark:bg-gray-900'>
                 <h2 className='text-2xl text-center mb-4 font-bold uppercase'>Sign up</h2>
 
                 <form onSubmit={handleSubmit(handleSignup)}>
 
                     <div className="form-control w-full mb-2">
                         <label className="label">
-                            <span className="label-text">Name</span>
+                            <span className="label-text dark:text-white">Name</span>
                         </label>
 
                         <input type="text" {...register("name", { required: "Name is Required" })}
-                            placeholder="Enter Name" className="input input-bordered w-full" />
+                            placeholder="Enter Name" className="input input-bordered w-full dark:text-black" />
 
                         {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
 
@@ -103,11 +103,11 @@ const Signup = () => {
 
                     <div className="form-control w-full mb-2">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text dark:text-white">Email</span>
                         </label>
 
                         <input type="email" {...register("email", { required: "Email is Required" })}
-                            placeholder="Enter Email" className="input input-bordered w-full" />
+                            placeholder="Enter Email" className="input input-bordered w-full dark:text-black" />
 
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
 
@@ -116,14 +116,14 @@ const Signup = () => {
 
                     <div className="form-control w-full mb-6">
                         <label className="label">
-                            <span className="label-text">Password</span>
+                            <span className="label-text dark:text-white">Password</span>
                         </label>
 
                         <input type="password" {...register("password", {
                             required: "Password is Required",
                             minLength: { value: 8, message: 'Password must be 8 characters or longer' },
                             // pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: "Password Should Contain at least 1 A-Z, 0-9 and [!@#$&*] character " }
-                        })} placeholder="Enter Password" className="input input-bordered w-full" />
+                        })} placeholder="Enter Password" className="input input-bordered w-full dark:text-black" />
 
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
 
@@ -135,7 +135,7 @@ const Signup = () => {
 
                     <input type="submit"
                         value='Sign up'
-                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md' />
+                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-4' />
                 </form>
 
                 <div className='mt-3'>
@@ -145,7 +145,7 @@ const Signup = () => {
                 <div className="divider">OR</div>
 
                 <div>
-                    <button onClick={handleSignInByGoogle} className='btn btn-outline btn-accent uppercase w-full'> <FcGoogle className='text-2xl mr-2'></FcGoogle> Continue with google</button>
+                    <button onClick={handleSignInByGoogle} className='btn btn-outline btn-accent uppercase w-full dark:bg-black dark:text-white'> <FcGoogle className='text-2xl mr-2'></FcGoogle> Continue with google</button>
                 </div>
 
             </div>

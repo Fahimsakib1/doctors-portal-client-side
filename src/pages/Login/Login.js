@@ -11,7 +11,9 @@ import toast from 'react-hot-toast';
 const Login = () => {
 
     const [loginError, setLoginError] = useState('')
-    const { userLogin, googleSignIn } = useContext(AuthContext);
+
+
+    const { userLogin, googleSignIn, resetPassword, user } = useContext(AuthContext);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -19,6 +21,8 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+
 
     const handleLogin = (data) => {
         console.log(data);
@@ -68,21 +72,49 @@ const Login = () => {
     }
 
 
+    const handleForgotPassword = () => {
+        
+        if(!user?.email){
+            Swal.fire({
+                icon: 'error',
+                title: 'To Reset Password',
+                text: 'You must provide your email',
+            })
+            return;
+        }
+
+        resetPassword(user?.email)
+        .then( () => {
+            Swal.fire(
+                'Hello!',
+                'Password reset link has been sent to your email. Please check your email',
+                'success'
+            )
+        })
+        .catch( error => {
+            console.log(error);
+        })
+
+
+        
+    }
+
+
 
     return (
         <div className='mt-12 flex justify-center items-center'>
-            <div className='w-96 p-6 border-2 rounded-xl'>
+            <div className='w-96 p-6 border-2 rounded-xl dark:bg-gray-900 '>
                 <h2 className='text-2xl text-center mb-4 font-bold uppercase'>Login</h2>
 
                 <form onSubmit={handleSubmit(handleLogin)}>
 
                     <div className="form-control w-full mb-2">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text dark:text-white">Email</span>
                         </label>
 
                         <input type="email" {...register("email", { required: "Email is Required" })}
-                            placeholder="Enter Email" className="input input-bordered w-full" />
+                            placeholder="Enter Email" className="input input-bordered w-full dark:text-black" />
 
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
 
@@ -91,22 +123,22 @@ const Login = () => {
 
                     <div className="form-control w-full">
                         <label className="label">
-                            <span className="label-text">Password</span>
+                            <span className="label-text dark:text-white">Password</span>
                         </label>
 
-                        <input type="password" {...register("password", { required: "Password is Required", minLength: { value: 8, message: 'Password must be 8 characters or longer' } })} placeholder="Enter Password" className="input input-bordered w-full" />
+                        <input type="password" {...register("password", { required: "Password is Required", minLength: { value: 8, message: 'Password must be 8 characters or longer' } })} placeholder="Enter Password" className="input input-bordered w-full dark:text-black" />
 
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
 
                         <label className="label mb-6">
-                            <span className="label-text">Forget Password?</span>
+                            <span onClick = {handleForgotPassword} className="label-text hover:text-blue-600 font-semibold dark:text-blue-600">Forget Password?</span>
                         </label>
 
                     </div>
 
                     <input type="submit"
                     value='Login'
-                    className='btn btn-accent w-full text-white uppercase py-3 rounded-md' />
+                    className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-4' />
 
                     {
                         loginError && <p className='text-red-600'>{loginError}</p>
@@ -120,7 +152,7 @@ const Login = () => {
                 <div className="divider">OR</div>
 
                 <div>
-                    <button onClick={handleSignInByGoogle} className='btn btn-outline btn-accent uppercase w-full'> <FcGoogle className='text-2xl mr-2'></FcGoogle> Continue with google</button>
+                    <button onClick={handleSignInByGoogle} className='btn btn-outline btn-accent uppercase w-full dark:bg-black dark:text-white '> <FcGoogle className='text-2xl mr-2'></FcGoogle> Continue with google</button>
                 </div>
 
             </div>
