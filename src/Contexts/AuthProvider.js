@@ -48,22 +48,25 @@ const AuthProvider = ({ children }) => {
 
     }
 
+    
     //code for toggle theme
     const [theme, setTheme] = useState("Light");
 
     useEffect( () => {
         if(theme === "dark"){
             document.documentElement.classList.add("dark")
+            
         }
         else{
             document.documentElement.classList.remove("dark")
+            
+            
         }
     }, [theme])
 
     const ThemeChange = () => {
         setTheme(theme === "dark" ? "Light" : "dark")
     }
-
 
 
     const handleThemeSwitch = () => {

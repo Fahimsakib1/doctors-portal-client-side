@@ -7,9 +7,7 @@ import routes from './Routes/Routes/Routes';
 
 function App() {
   
-  const {ThemeChange, handleThemeSwitch} = useContext(AuthContext)
 
-  handleThemeSwitch();
   
   return (
     <div className='max-w-[1440px] mx-auto dark:bg-black dark:text-white dark:max-w-[1550px]'>

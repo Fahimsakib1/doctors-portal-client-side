@@ -5,7 +5,7 @@ import { AuthContext } from '../../../Contexts/AuthProvider';
 const Navbar = () => {
 
 
-    const { user, signOutUser, theme, ThemeChange } = useContext(AuthContext);
+    const { user, signOutUser, theme, ThemeChange, setTheme } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -41,7 +41,8 @@ const Navbar = () => {
 
 
     const handleThemeSwitch = () => {
-        ThemeChange()
+        ThemeChange();
+        //setTheme(null)
     }
 
 
@@ -51,18 +52,20 @@ const Navbar = () => {
 
 
 
-    const menuItems = <React.Fragment>
+    const menuItems = <React.Fragment> 
 
-        <li className='dark:text-white'><Link to='/'>Home</Link></li>
-        <li className='dark:text-white'><Link to='/appointment'>Appointment</Link></li>
-        <li className='dark:text-white'><Link to='/about'>About Us</Link></li>
-        <li className='dark:text-white'><Link to='/dashboard'>Dashboard</Link></li>
+        <li className='dark:text-white dark:hover:text-orange-500'><Link to='/'>Home</Link></li>
+        <li className='dark:text-white dark:hover:text-orange-500'><Link to='/appointment'>Appointment</Link></li>
+        <li className='dark:text-white dark:hover:text-orange-500'><Link to='/about'>About Us</Link></li>
+        
+        {/* <li className='dark:text-white dark:hover:text-orange-500'><Link to='/dashboard'>Dashboard</Link></li> */}
+
         {
             user?.uid ?
                 <>
                     {user?.uid && <p className='text-md text-blue-600 block lg:hidden'>Welcome, {user.displayName}</p>}
 
-                    {/* <li><Link to='/dashboard'>Dashboard</Link></li> */}
+                    <li className='dark:text-white dark:hover:text-orange-500'><Link to='/dashboard'>Dashboard</Link></li>
 
                     <li className='text-red-600 font-bold'><button onClick={handleLogOut} className='bg-red-600 text-white rounded-lg'>Sign Out</button></li>
 
@@ -70,9 +73,10 @@ const Navbar = () => {
                 :
                 <>
                     <li className='font-bold'><Link to='/login' className='bg-green-600 text-white rounded-lg lg:mr-2'>Login</Link></li>
-                    <li className='font-bold'><Link to='/signup' className='bg-blue-600 text-white rounded-lg sm:mt-2 md:mt-2 lg:mt-0 mt-2'>Signup</Link></li>
+                    <li className='font-bold'><Link to='/signup' className='bg-blue-700 text-white rounded-lg sm:mt-2 md:mt-2 lg:mt-0 mt-2'>Signup</Link></li>
                 </>
         }
+        
         <input onClick={handleThemeSwitch} type="checkbox" className="toggle toggle-md my-auto ml-4 sm:mt-2 md:mt-2 mt-2 bg-black" title={theme === "dark" ? 'Light Mode' : 'Dark Mode'}/>
 
     </React.Fragment>

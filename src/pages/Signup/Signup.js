@@ -9,10 +9,13 @@ import toast from 'react-hot-toast';
 const Signup = () => {
 
 
-    const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
+    const { createUser, updateUser, googleSignIn, loading, setLoading } = useContext(AuthContext);
 
     const [error, setError] = useState('')
 
+
+
+    //we can use default input field values to react hook form
     // const { register, handleSubmit, formState: { errors } } = useForm({
     //     defaultValues: {
     //         name: 'Fahim Faysal',
@@ -21,9 +24,12 @@ const Signup = () => {
     //     },
     // });
 
+
+
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+
 
     const handleSignup = (data) => {
         console.log(data);
@@ -31,51 +37,65 @@ const Signup = () => {
 
         createUser(data.email, data.password)
             .then(result => {
-                const user = result.user;
-                console.log("User from Sign Up Page", user);
-                Swal.fire(
-                    'Nice',
-                    'User Created and Updated Name Successfully',
-                    'success'
-                )
+                // const user = result.user;
+                // console.log("User from Sign Up Page", user);
+                // Swal.fire(
+                //     'Nice',
+                //     'User Created and Updated Users Name Successfully',
+                //     'success'
+                // )
 
 
                 //updating the user name
                 const userInfo = {
-                    displayName : data.name
+                    displayName: data.name
                 }
 
                 updateUser(userInfo)
-                .then(() => {})
-                .catch(error => {
-                    console.error(error);
-                    setError(error.message)
-                })
+                    .then(() => {
+                        Swal.fire(
+                            'Nice',
+                            'User Created and Updated Users Name Successfully',
+                            'success'
+                        )
+                        navigate('/');
+                        const user = result.user;
+                        console.log("User from Sign Up Page After Update Name", user);
+                        setLoading(false);
+                    })
 
-                navigate('/login')
-                
+                    .catch(error => {
+                        console.error(error);
+                        setError(error.message)
+                        toast.error("User name Update Failed")
+                    })
+
+                //navigate('/login')
+
             })
             .catch(error => setError(error.message))
     }
 
 
+
+
     const handleSignInByGoogle = () => {
         googleSignIn()
-        .then(result => {
-            const user = result.user;
-            console.log("User Sign in By Google", user);
-            Swal.fire(
-                'Nice',
-                'User Created Successfully By Google',
-                'success'
-            )
-            navigate('/')
+            .then(result => {
+                const user = result.user;
+                console.log("User Sign in By Google", user);
+                Swal.fire(
+                    'Nice',
+                    'User Created Successfully By Google',
+                    'success'
+                )
+                navigate('/')
 
-        })
-        .catch(error => {
-            toast.error("Google Sign In Failed")
-            setError(error.message)
-        })
+            })
+            .catch(error => {
+                toast.error("Google Sign In Failed")
+                setError(error.message)
+            })
     }
 
 
@@ -135,7 +155,7 @@ const Signup = () => {
 
                     <input type="submit"
                         value='Sign up'
-                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-4' />
+                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
                 </form>
 
                 <div className='mt-3'>

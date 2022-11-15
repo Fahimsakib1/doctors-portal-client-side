@@ -138,7 +138,7 @@ const Login = () => {
 
                     <input type="submit"
                     value='Login'
-                    className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-4' />
+                    className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
 
                     {
                         loginError && <p className='text-red-600'>{loginError}</p>
