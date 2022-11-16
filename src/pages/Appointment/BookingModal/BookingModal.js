@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 
 
-const BookingModal = ({ treatment, setTreatment, selectedDate }) => {
+const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
 
     // console.log("Treatment values on Booking Modal Page", treatment.slots);
 
@@ -53,6 +53,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate }) => {
                     console.log(data)
                     toast.success('Booking Added Successfully!')
                     //send the booking object data to the server and once the data is sent then close the modal
+                    refetch();
                     setTreatment(null);
                     event.target.reset();
                 }
@@ -60,8 +61,8 @@ const BookingModal = ({ treatment, setTreatment, selectedDate }) => {
                 else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops... Order Not Placed',
-                        text: 'Something went wrong!'
+                        title: `${data.message}`,
+                        text: 'You cant book More For Today!'
                     })
                 }
 

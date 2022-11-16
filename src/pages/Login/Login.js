@@ -37,7 +37,7 @@ const Login = () => {
                 //     'success'
                 // )
                 toast.success('Login Successful');
-                navigate(from, {replace: true});
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 Swal.fire({
@@ -54,27 +54,27 @@ const Login = () => {
 
     const handleSignInByGoogle = () => {
         googleSignIn()
-        .then(result => {
-            const user = result.user;
-            console.log("User Sign in By Google", user);
-            Swal.fire(
-                'Nice',
-                'User Created Successfully By Google',
-                'success'
-            )
-            navigate(from, {replace: true});
+            .then(result => {
+                const user = result.user;
+                console.log("User Sign in By Google", user);
+                Swal.fire(
+                    'Nice',
+                    'User Created Successfully By Google',
+                    'success'
+                )
+                navigate(from, { replace: true });
 
-        })
-        .catch(error => {
-            toast.error("Google Sign In Failed")
-            setLoginError(error.message)
-        })
+            })
+            .catch(error => {
+                toast.error("Google Sign In Failed")
+                setLoginError(error.message)
+            })
     }
 
 
     const handleForgotPassword = () => {
-        
-        if(!user?.email){
+
+        if (!user?.email) {
             Swal.fire({
                 icon: 'error',
                 title: 'To Reset Password',
@@ -84,20 +84,23 @@ const Login = () => {
         }
 
         resetPassword(user?.email)
-        .then( () => {
-            Swal.fire(
-                'Hello!',
-                'Password reset link has been sent to your email. Please check your email',
-                'success'
-            )
-        })
-        .catch( error => {
-            console.log(error);
-        })
+            .then(() => {
+                Swal.fire(
+                    'Hello!',
+                    'Password reset link has been sent to your email. Please check your email',
+                    'success'
+                )
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
 
-        
+
     }
+
+
+
 
 
 
@@ -131,14 +134,14 @@ const Login = () => {
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
 
                         <label className="label mb-6">
-                            <span onClick = {handleForgotPassword} className="label-text hover:text-blue-600 font-semibold dark:text-blue-600">Forget Password?</span>
+                            <span onClick={handleForgotPassword} className="label-text hover:text-blue-600 font-semibold dark:text-blue-600">Forget Password?</span>
                         </label>
 
                     </div>
 
                     <input type="submit"
-                    value='Login'
-                    className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
+                        value='Login'
+                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
 
                     {
                         loginError && <p className='text-red-600'>{loginError}</p>
@@ -156,6 +159,7 @@ const Login = () => {
                 </div>
 
             </div>
+
         </div>
     );
 };

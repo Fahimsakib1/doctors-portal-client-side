@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../Shared/Loading/Spinner';
 import BookingModal from '../BookingModal/BookingModal';
 import AppointmentOption from './AppointmentOption';
 
@@ -16,17 +17,18 @@ const AvailableAppointments = ({ selectedDate }) => {
 
 
     //getting all the appointment option data from database through server by react query
-    const {data : appointmentOptions = [] } = useQuery({
+    const {data : appointmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['appointmentOptions', date],
         queryFn: () => fetch(`http://localhost:5000/appointmentOptions?date=${date}`)
         .then(res => res.json())
     })
 
-
+    // if(isLoading){
+    //     return <Spinner></Spinner>
+    // }
 
 
     //react query using async await
-
     // const {data: appointmentOptions = [] } = useQuery({
     //     queryKey: ['appointmentOptions'],
     //     queryFn: async() => {
@@ -50,6 +52,10 @@ const AvailableAppointments = ({ selectedDate }) => {
         <section className='mt-24'>
             <p className='text-center text-primary font-semibold text-xl'>Available Appointments On {format(selectedDate, 'PP')}</p>
 
+            {
+                isLoading && <Spinner></Spinner>
+            }
+
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto'>
                 {
                     appointmentOptions.map(appointmentOption => <AppointmentOption key={appointmentOption._id}
@@ -61,7 +67,9 @@ const AvailableAppointments = ({ selectedDate }) => {
 
             {
                 treatment &&
-                <BookingModal treatment={treatment} setTreatment ={setTreatment} selectedDate={selectedDate}></BookingModal>
+                <BookingModal treatment={treatment} setTreatment ={setTreatment} selectedDate={selectedDate}
+                refetch={refetch}>
+                </BookingModal>
             }
         </section>
     );

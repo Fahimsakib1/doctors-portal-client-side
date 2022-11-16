@@ -63,7 +63,7 @@ const Navbar = () => {
         {
             user?.uid ?
                 <>
-                    {user?.uid && <p className='text-md text-blue-600 block lg:hidden'>Welcome, {user.displayName}</p>}
+                    {user?.uid && <p className='text-md text-blue-600 block lg:hidden'>Welcome, {user.email}</p>}
 
                     <li className='dark:text-white dark:hover:text-orange-500'><Link to='/dashboard'>Dashboard</Link></li>
 
@@ -103,7 +103,7 @@ const Navbar = () => {
 
                 <div className='hidden lg:block'>
                     {
-                        user?.uid && <p className='text-2xl text-blue-600 font-semibold'>Welcome, {user?.displayName ? user.displayName : user.email}</p>
+                        user?.uid && <p className='text-2xl text-blue-600 font-semibold'>Welcome, {user?.email ? user.email : user.email}</p>
                     }
                 </div>
 
