@@ -59,7 +59,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar bg-base-100 flex justify-between dark:bg-gray-900 pb-6">
+            <div className="navbar  flex justify-between dark:bg-gray-900 pb-6">
 
                 <div className="navbar-start w-[400px]">
                     <div className="dropdown">

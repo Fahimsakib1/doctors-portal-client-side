@@ -17,7 +17,7 @@ const Signup = () => {
     const [error, setError] = useState('');
 
     
-    //setting the token from client side and checking the user email for token
+    //setting the token to local storage from client side and checking the user email for token
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const [token] = useToken(createdUserEmail);
 
@@ -40,7 +40,7 @@ const Signup = () => {
 
     
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
 
@@ -76,6 +76,7 @@ const Signup = () => {
                         const user = result.user;
                         console.log("User from Sign Up Page After Update Name", user);
                         setLoading(false);
+                        reset();
                     })
 
                     .catch(error => {

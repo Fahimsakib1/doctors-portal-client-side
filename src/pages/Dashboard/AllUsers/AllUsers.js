@@ -6,9 +6,19 @@ import { FaTrashAlt } from "react-icons/fa";
 const AllUsers = () => {
 
     // used react query to load the registered users
+    // const { data: users = [], refetch } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: () => fetch('http://localhost:5000/users')
+    //         .then(res => res.json())
+    // })
+
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch('http://localhost:5000/users')
+        queryFn: () => fetch('http://localhost:5000/users', {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('doctorsPortalToken')}`
+            }
+        })
             .then(res => res.json())
     })
 
@@ -37,7 +47,7 @@ const AllUsers = () => {
     return (
 
         <div>
-            <h2 className='text-2xl text-center text-blue-600 my-6'> Total Users {users?.length}</h2>
+            <h2 className='text-2xl text-center text-blue-600 my-6'> Total Registered Users {users?.length}</h2>
 
             <div className="overflow-x-auto mb-24 mx-24">
                 <table className="table w-full">
@@ -65,7 +75,7 @@ const AllUsers = () => {
                                         <button className='btn btn-xs bg-green-600'>Admin</button>
                                     }
                                 </td>
-                                <td className='dark:bg-gray-800 border-1 border-black text-center'><FaTrashAlt className=' text-2xl text-red-600 text-center hover:text-red-700'></FaTrashAlt></td>
+                                <td className='dark:bg-gray-800 border-1 border-black text-center'><button><FaTrashAlt className=' text-2xl text-red-600  hover:text-red-700'></FaTrashAlt></button></td>
                             </tr>)
                         }
                     </tbody>

@@ -44,7 +44,7 @@ const MyAppointment = () => {
             <h3 className='text-3xl mb-10 text-center text-green-600 mt-6'>{bookings?.length} {bookings.length > 1 ? "Bookings" : 'Booking'} For {user?.email}</h3>
 
             <div className="overflow-x-auto mb-24">
-                <table className="table w-full">
+                <table className="table w-full sm:w-full md:w-full lg:w-3/4 mx-auto">
 
                     <thead className=''>
                         <tr className='dark:text-white text-center border-2'>
@@ -56,8 +56,18 @@ const MyAppointment = () => {
                         </tr>
                     </thead>
                     <tbody className='dark:text-black'>
+                        {/* {
+                            bookings?.map((booking, index) => <tr key={index} className='dark:text-white'>
+                                <th className='dark:bg-gray-700 border-1 border-black text-center'>{index + 1}</th>
+                                <th className='dark:bg-gray-700 border-1 border-black text-center'>{booking.treatment}</th>
+                                <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.patient}</td>
+                                <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.appointmentDate}</td>
+                                <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.slot}</td>
+                            </tr>)
+                        } */}
                         {
-                            bookings.map((booking, index) => <tr key={index} className='dark:text-white'>
+                            bookings && 
+                            bookings?.map((booking, index) => <tr key={index} className='dark:text-white'>
                                 <th className='dark:bg-gray-700 border-1 border-black text-center'>{index + 1}</th>
                                 <th className='dark:bg-gray-700 border-1 border-black text-center'>{booking.treatment}</th>
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.patient}</td>

@@ -13,10 +13,9 @@ const Login = () => {
 
     const [loginError, setLoginError] = useState('')
 
-
     const { userLogin, googleSignIn, resetPassword, user } = useContext(AuthContext);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
     const location = useLocation();
@@ -25,35 +24,58 @@ const Login = () => {
 
 
 
-    //setting the token from client side and checking the user email for token
-    const [loginUserEmail, setLoginUserEmail] = useState('');
-    const [token] = useToken(loginUserEmail);
-    if (token) {
+    //setting the token to local storage from client side and checking the user email for token
+    // const [loginUserEmail, setLoginUserEmail] = useState('');
+    // const [token] = useToken(loginUserEmail);
+    // if (token) {
 
-        Swal.fire(
-            'Nice',
-            'User Logged In by verifying the token',
-            'success'
-        )
-        toast.success('User Login Successful By Verifying Token');
-        navigate(from, { replace: true });
-    }
+    //     Swal.fire(
+    //         'Nice',
+    //         'User Logged In by verifying the token',
+    //         'success'
+    //     )
+    //     toast.success('User Login Successful By Verifying Token');
+    //     navigate(from, { replace: true });
+    // }
 
 
 
     const handleLogin = (data) => {
+        
         console.log(data);
         setLoginError('');
         userLogin(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log("Uer From Login Page", user);
-                setLoginUserEmail(data.email)
-
-                //toast.success('Login Successful');
-
+                //setLoginUserEmail(data.email)
+                toast.success('Login Successful');
                 //navigate(from, { replace: true });
+
+                const currentUser = {
+                    email: user?.email
+                }
+                //get jwt token in client side
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Token received from server side", data.token)
+                    //set the JWT token in local storage
+                    localStorage.setItem('doctorsPortalToken', data.token);
+                    navigate(from, { replace: true });
+
+                    })
+                reset();
             })
+
+
             .catch(error => {
                 Swal.fire({
                     icon: 'error',
@@ -110,11 +132,7 @@ const Login = () => {
                 console.log(error);
             })
 
-
-
     }
-
-
 
 
 
@@ -131,7 +149,7 @@ const Login = () => {
                             <span className="label-text dark:text-white">Email</span>
                         </label>
 
-                        <input type="email" {...register("email", { required: "Email is Required" })}
+                        <input name="email" type="email" {...register("email", { required: "Email is Required" })}
                             placeholder="Enter Email" className="input input-bordered w-full dark:text-black" />
 
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
