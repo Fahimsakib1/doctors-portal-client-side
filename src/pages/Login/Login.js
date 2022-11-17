@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Contexts/AuthProvider';
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
+import useToken from '../../Hooks/useToken';
 
 
 
@@ -24,6 +25,22 @@ const Login = () => {
 
 
 
+    //setting the token from client side and checking the user email for token
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
+    if (token) {
+
+        Swal.fire(
+            'Nice',
+            'User Logged In by verifying the token',
+            'success'
+        )
+        toast.success('User Login Successful By Verifying Token');
+        navigate(from, { replace: true });
+    }
+
+
+
     const handleLogin = (data) => {
         console.log(data);
         setLoginError('');
@@ -31,13 +48,11 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log("Uer From Login Page", user);
-                // Swal.fire(
-                //     'Nice',
-                //     'Login Successful',
-                //     'success'
-                // )
-                toast.success('Login Successful');
-                navigate(from, { replace: true });
+                setLoginUserEmail(data.email)
+
+                //toast.success('Login Successful');
+
+                //navigate(from, { replace: true });
             })
             .catch(error => {
                 Swal.fire({

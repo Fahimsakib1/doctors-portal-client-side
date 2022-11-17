@@ -5,11 +5,11 @@ const BookingTable = ({ appointment }) => {
     const { appointmentDate, email, patient, slot, treatment, phone } = appointment;
     return (
 
-        <tr>
-            <th>{treatment}</th>
-            <td>{patient}</td>
-            <td>{appointmentDate}</td>
-            <td>{slot}</td>
+        <tr className='dark:text-white'>
+            <th className='dark:bg-gray-700'>{treatment}</th>
+            <td className='dark:bg-gray-700'>{patient}</td>
+            <td className='dark:bg-gray-700'>{appointmentDate}</td>
+            <td className='dark:bg-gray-700'>{slot}</td>
         </tr>
     );
 };

@@ -5,13 +5,25 @@ import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Contexts/AuthProvider';
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
+import useToken from '../../Hooks/useToken';
 
 const Signup = () => {
 
 
     const { createUser, updateUser, googleSignIn, loading, setLoading } = useContext(AuthContext);
 
-    const [error, setError] = useState('')
+    const navigate = useNavigate();
+
+    const [error, setError] = useState('');
+
+    
+    //setting the token from client side and checking the user email for token
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
+
+    if(token){
+        navigate('/')
+    }
 
 
 
@@ -26,9 +38,10 @@ const Signup = () => {
 
 
 
-    const navigate = useNavigate();
+    
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+
 
 
     const handleSignup = (data) => {
@@ -50,15 +63,16 @@ const Signup = () => {
                 const userInfo = {
                     displayName: data.name
                 }
-
                 updateUser(userInfo)
                     .then(() => {
+                        
+                        saveUserToDataBase(data.name, data.email);
                         Swal.fire(
                             'Nice',
                             'User Created and Updated Users Name Successfully',
                             'success'
                         )
-                        navigate('/');
+
                         const user = result.user;
                         console.log("User from Sign Up Page After Update Name", user);
                         setLoading(false);
@@ -75,6 +89,52 @@ const Signup = () => {
             })
             .catch(error => setError(error.message))
     }
+
+
+    
+    //save user info to database
+    const saveUserToDataBase = (name, email) => {
+        const user = {name, email};
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            
+            if(data.acknowledged){
+                console.log('Save user Info to database from Signup Page', data);
+                
+                toast.success('User Added to Database')
+                //getUserToken(email)
+                setCreatedUserEmail(email)
+            }
+            else{
+                toast.error('user can not be added to database')
+            }
+            
+        })
+    }
+
+
+    
+    //user token from client side
+    // const getUserToken = (email) => {
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data.accessToken){
+    //             localStorage.setItem('doctorsPortalToken', data.accessToken)
+    //             navigate('/');
+    //         }
+    //         else{
+    //             toast.error('Token Not Issued')
+    //         }
+    //     })
+    // }
 
 
 

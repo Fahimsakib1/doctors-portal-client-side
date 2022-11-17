@@ -16,22 +16,22 @@ const Dashboard = () => {
 
 
     return (
-        <div className='mx-auto'>
+        <div className=''>
 
-            <h1 className='text-2xl text-center mt-10 mb-8 text-blue-600'>{appointments?.length} Booking For {user?.email}</h1>
+            <h1 className='text-2xl text-center mb-8 text-blue-600'>{appointments?.length} Booking For {user?.email}</h1>
             
-            <div className="overflow-x-auto w-1/2 mx-auto mb-24">
+            <div className="overflow-x-auto mb-24 w-3/4 mx-auto ">
                 <table className="table w-full">
 
-                    <thead>
-                        <tr>
-                            <th>Booked For</th>
-                            <th>Patient Name</th>
-                            <th>Booking Date</th>
-                            <th>Slot</th>
+                    <thead className=''>
+                        <tr className='dark:text-white text-center '>
+                            <th className='dark:bg-slate-800'>Booked For</th>
+                            <th className='dark:bg-slate-800'>Patient Name</th>
+                            <th className='dark:bg-slate-800'>Booking Date</th>
+                            <th className='dark:bg-slate-800'>Slot</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='dark:text-black'>
                         {
                             appointments.map(appointment => <BookingTable appointment={appointment} key={appointment._id}></BookingTable>)
                         }
