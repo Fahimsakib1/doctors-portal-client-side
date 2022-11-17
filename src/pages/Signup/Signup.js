@@ -18,12 +18,12 @@ const Signup = () => {
 
     const [error, setError] = useState('');
 
-    
+
     //setting the token to local storage from client side and checking the user email for token
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const [token] = useToken(createdUserEmail);
 
-    if(token){
+    if (token) {
         navigate('/')
     }
 
@@ -40,7 +40,7 @@ const Signup = () => {
 
 
 
-    
+
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -67,7 +67,7 @@ const Signup = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        
+
                         saveUserToDataBase(data.name, data.email);
                         Swal.fire(
                             'Nice',
@@ -94,10 +94,10 @@ const Signup = () => {
     }
 
 
-    
+
     //save user info to database
     const saveUserToDataBase = (name, email) => {
-        const user = {name, email};
+        const user = { name, email };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -105,25 +105,31 @@ const Signup = () => {
             },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data => {
-            
-            if(data.acknowledged){
-                console.log('Save user Info to database from Signup Page', data);
-                
-                toast.success('User Added to Database')
-                //getUserToken(email)
-                setCreatedUserEmail(email)
-            }
-            else{
-                toast.error('user can not be added to database')
-            }
-            
-        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.acknowledged) {
+                    console.log('Save user Info to database from Signup Page', data);
+
+                    toast.success('User Added to Database')
+                    //getUserToken(email)
+                    setCreatedUserEmail(email)
+                }
+                else {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${data.message}`,
+                        text: 'Please Sign Up with a new Email'
+                    })
+
+                }
+
+            })
     }
 
 
-    
+
     //user token from client side
     // const getUserToken = (email) => {
     //     fetch(`http://localhost:5000/jwt?email=${email}`)
@@ -147,12 +153,8 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 console.log("User Sign in By Google", user);
+                
                 saveUserToDataBase('User Signed In By Google', user?.email)
-                Swal.fire(
-                    'Nice',
-                    'User Created Successfully By Google',
-                    'success'
-                )
                 tokenForGoogleSignIn(user?.email)
                 //navigate('/')
 
@@ -166,7 +168,7 @@ const Signup = () => {
 
 
     const tokenForGoogleSignIn = (email) => {
-        
+
         //get jwt token in client side
         fetch('http://localhost:5000/jwt', {
             method: 'POST',
@@ -175,11 +177,11 @@ const Signup = () => {
             },
             body: JSON.stringify(email)
         })
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem('doctorsPortalToken', data.token);
-            navigate(from, { replace: true });
-        })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.setItem('doctorsPortalToken', data.token);
+                navigate(from, { replace: true });
+            })
     }
 
 

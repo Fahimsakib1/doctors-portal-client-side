@@ -37,6 +37,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
             email: email,
             phone: phone
         }
+        
         console.log("Booking modal data from booking Page", booking);
 
         fetch('http://localhost:5000/bookings', {

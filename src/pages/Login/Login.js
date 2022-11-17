@@ -52,6 +52,7 @@ const Login = () => {
                 toast.success('Login Successful');
                 //navigate(from, { replace: true });
 
+                
                 const currentUser = {
                     email: user?.email
                 }
@@ -95,13 +96,26 @@ const Login = () => {
                 const user = result.user;
                 console.log("User Sign in By Google", user);
 
-                tokenForGoogleSignIn(user?.email)
-                Swal.fire(
-                    'Nice',
-                    'User Created Successfully By Google',
-                    'success'
-                )
-                //navigate(from, { replace: true });
+                const currentUser = {
+                    email: user?.email
+                }
+                //get jwt token in client side
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Token received from server side", data.token)
+                    //set the JWT token in local storage
+                    localStorage.setItem('doctorsPortalToken', data.token);
+                    navigate(from, { replace: true });
+
+                    })
 
             })
             .catch(error => {
@@ -142,23 +156,22 @@ const Login = () => {
 
 
     
-    const tokenForGoogleSignIn = (email) => {
+    // const tokenForGoogleSignIn = (email) => {
         
-        //get jwt token in client side
-        fetch('http://localhost:5000/jwt', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(email)
-        })
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem('doctorsPortalToken', data.token);
-            navigate(from, { replace: true });
+    //     fetch('http://localhost:5000/jwt', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(email)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         localStorage.setItem('doctorsPortalToken', data.token);
+    //         navigate(from, { replace: true });
 
-        })
-    }
+    //     })
+    // }
 
 
 
