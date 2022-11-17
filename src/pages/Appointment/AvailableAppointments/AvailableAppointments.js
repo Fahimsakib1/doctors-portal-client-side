@@ -50,7 +50,7 @@ const AvailableAppointments = ({ selectedDate }) => {
 
     return (
         <section className='mt-24'>
-            <p className='text-center text-primary font-semibold text-xl'>Available Appointments On {format(selectedDate, 'PP')}</p>
+            <p className='text-center text-primary font-semibold text-xl dark:px-16 dark:py-4 dark:border-2 dark:border-blue-800 dark:rounded-lg dark:sm:w-full dark:md:w-3/4 dark:lg:w-1/2 dark:w-3/4 dark:mx-auto dark:'>Available Appointments On {format(selectedDate, 'PP')}</p>
 
             {
                 isLoading && <Spinner></Spinner>

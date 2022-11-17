@@ -8,7 +8,7 @@ const AppointmentOption = ({ appointmentOption, setTreatment }) => {
 
     return (
         <div className='mt-24'>
-            <div className="card w-96 bg-base-100 shadow-xl mx-auto dark:bg-gray-800">
+            <div className="card  bg-base-100 shadow-xl mx-auto dark:bg-gray-800 md:w-96 sm:w-80 w-80">
                 <div className="card-body">
                     
                     <h2 className="text-primary font-semibold text-center text-2xl">{name}</h2>

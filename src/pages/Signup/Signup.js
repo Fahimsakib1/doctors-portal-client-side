@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Contexts/AuthProvider';
 import Swal from 'sweetalert2'
@@ -13,6 +13,8 @@ const Signup = () => {
     const { createUser, updateUser, googleSignIn, loading, setLoading } = useContext(AuthContext);
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const [error, setError] = useState('');
 
@@ -145,18 +147,39 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 console.log("User Sign in By Google", user);
+                saveUserToDataBase('User Signed In By Google', user?.email)
                 Swal.fire(
                     'Nice',
                     'User Created Successfully By Google',
                     'success'
                 )
-                navigate('/')
+                tokenForGoogleSignIn(user?.email)
+                //navigate('/')
 
             })
             .catch(error => {
                 toast.error("Google Sign In Failed")
                 setError(error.message)
             })
+    }
+
+
+
+    const tokenForGoogleSignIn = (email) => {
+        
+        //get jwt token in client side
+        fetch('http://localhost:5000/jwt', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(email)
+        })
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem('doctorsPortalToken', data.token);
+            navigate(from, { replace: true });
+        })
     }
 
 

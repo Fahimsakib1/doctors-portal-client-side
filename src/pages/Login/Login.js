@@ -94,12 +94,14 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log("User Sign in By Google", user);
+
+                tokenForGoogleSignIn(user?.email)
                 Swal.fire(
                     'Nice',
                     'User Created Successfully By Google',
                     'success'
                 )
-                navigate(from, { replace: true });
+                //navigate(from, { replace: true });
 
             })
             .catch(error => {
@@ -107,6 +109,10 @@ const Login = () => {
                 setLoginError(error.message)
             })
     }
+
+
+
+
 
 
     const handleForgotPassword = () => {
@@ -132,6 +138,26 @@ const Login = () => {
                 console.log(error);
             })
 
+    }
+
+
+    
+    const tokenForGoogleSignIn = (email) => {
+        
+        //get jwt token in client side
+        fetch('http://localhost:5000/jwt', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(email)
+        })
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem('doctorsPortalToken', data.token);
+            navigate(from, { replace: true });
+
+        })
     }
 
 

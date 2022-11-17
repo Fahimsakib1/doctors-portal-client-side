@@ -65,6 +65,8 @@ const MyAppointment = () => {
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.slot}</td>
                             </tr>)
                         } */}
+
+
                         {
                             bookings && 
                             bookings?.map((booking, index) => <tr key={index} className='dark:text-white'>
@@ -75,6 +77,9 @@ const MyAppointment = () => {
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.slot}</td>
                             </tr>)
                         }
+
+
+
                     </tbody>
                 </table>
             </div>
