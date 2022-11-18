@@ -10,8 +10,8 @@ const Spinner = () => {
                 </div>
             </div> */}
 
-            <div class="flex justify-center items-center">
-                <div class="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full border-black mt-4" role="status">
+            <div className="flex justify-center items-center">
+                <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full border-black mt-4" role="status">
                 </div>
             </div>
 

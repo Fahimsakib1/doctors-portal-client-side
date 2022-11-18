@@ -22,13 +22,17 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side ">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-64 bg-base-100 text-base-content dark:bg-gray-700 dark:text-white">
+                    <ul className="menu p-4 w-64  text-base-content dark:bg-gray-800 dark:text-white">
 
-                        <Link to='/dashboard'><button className='btn btn-md bg-blue-600 '>My Appointments</button></Link>
+                        <Link to='/dashboard'><button className='btn btn-md bg-blue-800 border-0'>My Appointments</button></Link>
                         {
                             isAdmin &&
                             <>
-                                <Link to='/dashboard/users'><button className='btn btn-md bg-green-600 mt-4'> Registered Users</button></Link>
+                                <Link to='/dashboard/users'><button className='btn btn-md bg-green-600 mt-4 border-0'> Registered Users</button></Link>
+
+                                <Link to='/dashboard/addDoctor'><button className='btn btn-md bg-purple-700 mt-4 px-7 border-0'> Add a Doctor</button></Link>
+
+                                <Link to='/dashboard/manageDoctors'><button className='btn btn-md bg-gray-600 mt-4 px-4 border-0'>Manage Doctors</button></Link>
                             </>
                         }
                     </ul>
