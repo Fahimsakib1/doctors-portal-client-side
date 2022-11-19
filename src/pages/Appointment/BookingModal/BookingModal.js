@@ -13,7 +13,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
     const { user } = useContext(AuthContext);
 
 
-    const { name, _id, slots } = treatment;
+    const { name, _id, slots, price } = treatment;
 
     const date = format(selectedDate, 'PP');
 
@@ -35,7 +35,8 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
             slot: slot,
             patient: patient,
             email: email,
-            phone: phone
+            phone: phone,
+            price: price
         }
         
         console.log("Booking modal data from booking Page", booking);
@@ -112,3 +113,4 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
 };
 
 export default BookingModal;
+

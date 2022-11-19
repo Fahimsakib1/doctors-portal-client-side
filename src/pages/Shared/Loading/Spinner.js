@@ -10,10 +10,12 @@ const Spinner = () => {
                 </div>
             </div> */}
 
-            <div className="flex justify-center items-center">
+            {/* <div className="flex justify-center items-center">
                 <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full border-black mt-4" role="status">
                 </div>
-            </div>
+            </div> */}
+
+            <div className="h-32 w-32 border-8 border-dashed rounded-full animate-spin border-blue-700 mx-auto mt-32"></div>
 
             {/* <div role="status">
                 <svg aria-hidden="true" class="mr-2 w-24 h-24  text-gray-200 animate-spin dark:text-gray-600 fill-blue-700" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

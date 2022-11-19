@@ -7,6 +7,7 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
+import { Link } from 'react-router-dom';
 
 const MyAppointment = () => {
 
@@ -53,6 +54,8 @@ const MyAppointment = () => {
                             <th className='dark:bg-slate-800 border-2 dark:border-green-600'>Patient Name</th>
                             <th className='dark:bg-slate-800 border-2 dark:border-green-600'>Booking Date</th>
                             <th className='dark:bg-slate-800 border-2 dark:border-green-600'>Time</th>
+                            <th className='dark:bg-slate-800 border-2 dark:border-green-600'>Price</th>
+                            <th className='dark:bg-slate-800 border-2 dark:border-green-600'>Payment</th>
                         </tr>
                     </thead>
                     <tbody className='dark:text-black'>
@@ -68,13 +71,29 @@ const MyAppointment = () => {
 
 
                         {
-                            bookings && 
+                            bookings &&
                             bookings?.map((booking, index) => <tr key={index} className='dark:text-white'>
                                 <th className='dark:bg-gray-700 border-1 border-black text-center'>{index + 1}</th>
                                 <th className='dark:bg-gray-700 border-1 border-black text-center'>{booking.treatment}</th>
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.patient}</td>
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.appointmentDate}</td>
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.slot}</td>
+                                <td className='dark:bg-gray-700 border-1 border-black text-center font-bold'>{booking?.price ? booking.price + ' Taka' : ''}</td>
+
+                                <td className='dark:bg-gray-700 border-1 border-black text-center'>
+                                    {
+                                        booking.price && !booking.paid &&
+                                        <Link to={`/dashboard/payment/${booking._id}`}>
+                                            <button className='btn btn-primary btn-sm px-6 dark:bg-blue-800 dark:border-0 dark:text-white'>Pay</button>
+                                        </Link>
+                                    }
+
+                                    {
+                                        booking.price && booking.paid && <span className='font-bold bg-green-600 rounded-md px-6 py-1 text-white'>Paid</span>
+                                    }
+                                </td>
+
+
                             </tr>)
                         }
 
