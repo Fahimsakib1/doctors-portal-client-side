@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
+import { MdOutlineWavingHand } from 'react-icons/md'
 
 const Navbar = () => {
 
 
     const { user, signOutUser, theme, ThemeChange, setTheme } = useContext(AuthContext);
+    console.log("User From Login Page", user)
 
     const navigate = useNavigate();
 
@@ -36,7 +38,14 @@ const Navbar = () => {
         {
             user?.uid ?
                 <>
-                    {user?.uid && <p className='text-md text-blue-600 block lg:hidden'>Welcome, {user.email}</p>}
+                    {
+                        user?.uid &&
+                        <div className='flex'>
+                            <p className='text-md text-blue-600 block lg:hidden'>Hello, {user.displayName ? user.displayName : user.email}
+                            </p>
+                            <MdOutlineWavingHand className='text-2xl text-green-600 ml-2 lg:hidden'></MdOutlineWavingHand>
+                        </div>
+                    }
 
                     <li className='dark:text-white dark:hover:text-orange-500'><Link to='/dashboard'>Dashboard</Link></li>
 
@@ -76,7 +85,11 @@ const Navbar = () => {
 
                 <div className='hidden lg:block'>
                     {
-                        user?.uid && <p className='text-2xl text-blue-600 font-semibold'>Welcome, {user?.email ? user.email : user.email}</p>
+                        user?.uid && <div className='flex'>
+                            <p className='text-3xl text-green-600 font-semibold'>Hello, {user.displayName ? user.displayName : user.email} </p>
+                            <MdOutlineWavingHand className='text-3xl text-green-600 mt-1 ml-2'></MdOutlineWavingHand>
+                        </div>
+
                     }
                 </div>
 
@@ -88,7 +101,7 @@ const Navbar = () => {
                 </div>
 
                 {/* dashboard er toggle button */}
-                <label htmlFor="dashboard-drawer"  tabIndex={2} className="btn btn-ghost lg:hidden dark:text-white">
+                <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden dark:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </label>
 

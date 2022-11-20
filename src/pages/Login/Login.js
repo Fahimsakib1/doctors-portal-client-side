@@ -6,6 +6,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
 import useToken from '../../Hooks/useToken';
+import SmallSpinner from '../../components/SmallSpinner/SmallSpinner';
 
 
 
@@ -13,9 +14,11 @@ const Login = () => {
 
     const [loginError, setLoginError] = useState('')
 
-    const { userLogin, googleSignIn, resetPassword, user } = useContext(AuthContext);
+    const { userLogin, googleSignIn, resetPassword, user, loading, setLoading } = useContext(AuthContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+    const [userEmail, setUserEmail] = useState('');
 
 
     const location = useLocation();
@@ -25,18 +28,18 @@ const Login = () => {
 
 
     //setting the token to local storage from client side and checking the user email for token
-    // const [loginUserEmail, setLoginUserEmail] = useState('');
-    // const [token] = useToken(loginUserEmail);
-    // if (token) {
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
+    if (token) {
 
-    //     Swal.fire(
-    //         'Nice',
-    //         'User Logged In by verifying the token',
-    //         'success'
-    //     )
-    //     toast.success('User Login Successful By Verifying Token');
-    //     navigate(from, { replace: true });
-    // }
+        Swal.fire(
+            'Nice',
+            'User Logged In by verifying the token',
+            'success'
+        )
+        toast.success('User Login Successful By Verifying Token');
+        navigate(from, { replace: true });
+    }
 
 
 
@@ -44,46 +47,49 @@ const Login = () => {
         
         console.log(data);
         setLoginError('');
+        setUserEmail(data.email)
         userLogin(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log("Uer From Login Page", user);
-                //setLoginUserEmail(data.email)
-                toast.success('Login Successful');
+                setLoginUserEmail(data.email)
+                //toast.success('Login Successful');
                 //navigate(from, { replace: true });
 
                 
-                const currentUser = {
-                    email: user?.email
-                }
-                //get jwt token in client side
-                fetch('http://localhost:5000/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
+                // const currentUser = {
+                //     email: user?.email
+                // }
+                // //get jwt token in client side
+                // fetch('http://localhost:5000/jwt', {
+                //     method: 'POST',
+                //     headers: {
+                //         'content-type': 'application/json'
+                //     },
+                //     body: JSON.stringify(currentUser)
+                // })
 
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Token received from server side", data.token)
-                    //set the JWT token in local storage
-                    localStorage.setItem('doctorsPortalToken', data.token);
-                    navigate(from, { replace: true });
+                // .then(res => res.json())
+                // .then(data => {
+                //     console.log("Token received from server side", data.token)
+                //     //set the JWT token in local storage
+                //     localStorage.setItem('doctorsPortalToken', data.token);
+                //     navigate(from, { replace: true });
 
-                    })
+                //     })
+                
                 reset();
             })
 
 
             .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Login Failed',
-                })
-
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: 'Login Failed',
+                // })
+                toast.error(error.message);
+                setLoading(false)
                 setLoginError(error.message)
             })
     }
@@ -127,11 +133,9 @@ const Login = () => {
 
 
 
-
-
     const handleForgotPassword = () => {
 
-        if (!user?.email) {
+        if (!userEmail) {
             Swal.fire({
                 icon: 'error',
                 title: 'To Reset Password',
@@ -139,17 +143,21 @@ const Login = () => {
             })
             return;
         }
+        setLoginError('');
 
-        resetPassword(user?.email)
+        resetPassword(userEmail)
             .then(() => {
                 Swal.fire(
                     'Hello!',
-                    'Password reset link has been sent to your email. Please check your email',
+                    `Password reset link has been sent to your email ${userEmail}. Please check your email`,
                     'success'
                 )
+                setLoading(false)
             })
             .catch(error => {
+                toast.error(error.message);
                 console.log(error);
+                //setLoading(false)
             })
 
     }
@@ -211,9 +219,14 @@ const Login = () => {
 
                     </div>
 
-                    <input type="submit"
-                        value='Login'
-                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
+                    {/* <input type="submit"
+                        value={loading ? <SmallSpinner> </SmallSpinner> : 'Login'}
+                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' /> */}
+                    <button type='submit' className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600'>
+                        
+                        {loading ? <SmallSpinner> </SmallSpinner> : 'Login'}
+                    
+                    </button>
 
                     {
                         loginError && <p className='text-red-600'>{loginError}</p>

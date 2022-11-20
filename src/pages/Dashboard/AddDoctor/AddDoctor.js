@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import Spinner from '../../Shared/Loading/Spinner';
 import Swal from 'sweetalert2'
+import SmallSpinner from '../../../components/SmallSpinner/SmallSpinner';
 
 
 
@@ -15,7 +16,7 @@ const AddDoctor = () => {
 
     //API key from image bb
     const imageHostKey = process.env.REACT_APP_imagebb_key;
-    console.log("Image BB Key", imageHostKey);
+    //console.log("Image BB Key", imageHostKey);
 
     const { createUser, updateUser, googleSignIn, loading, setLoading } = useContext(AuthContext);
 
@@ -90,6 +91,7 @@ const AddDoctor = () => {
                             title: `${result.message}`,
                             text: 'Add a New Doctor'
                         })
+                        //setLoading(false);
                     }
                     
                 })
@@ -188,6 +190,7 @@ const AddDoctor = () => {
                         <input type="submit"
                             value='Add'
                             className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
+                        
                     </form>
 
 

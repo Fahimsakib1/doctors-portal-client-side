@@ -32,7 +32,7 @@ const routes = createBrowserRouter ([
             {
                 path: '/login',
                 element: <Login></Login>
-            },
+            }, 
 
             {
                 path: '/appointment',

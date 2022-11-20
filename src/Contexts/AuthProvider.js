@@ -28,13 +28,13 @@ const AuthProvider = ({ children }) => {
 
     const signOutUser = () => {
         setLoading(true);
+        localStorage.removeItem('doctorsPortalToken')
         return signOut(auth);
     }
 
     const updateUser = (userInfo) => {
         setLoading(true);
         return updateProfile(auth.currentUser, userInfo)
-
     }
 
     const googleSignIn = () => {
@@ -76,12 +76,6 @@ const AuthProvider = ({ children }) => {
 
 
 
-
-
-
-
-
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log("Current User From Auth Provider", currentUser);
@@ -102,3 +96,4 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+

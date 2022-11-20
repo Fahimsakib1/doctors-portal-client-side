@@ -1,8 +1,8 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
-import { useNavigation } from 'react-day-picker';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import Spinner from '../../Shared/Loading/Spinner';
 import CheckOutForm from './CheckOutForm';
 
@@ -20,10 +20,10 @@ const Payment = () => {
     const { treatment, appointmentDate, slot, patient, email, phone, price } = booking;
 
     //API theke data load korar shomoy jehetu ektu time lage shei jonno ekta spinner dekhay dibo
-    // const navigation = useNavigation();
-    // if(navigation.state === "loading"){
-    //     return <Spinner></Spinner>
-    // }
+    const navigation = useNavigation();
+    if(navigation.state === "loading"){
+        return <LoadingSpinner></LoadingSpinner>
+    }
 
 
 

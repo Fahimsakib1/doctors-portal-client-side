@@ -78,7 +78,7 @@ const MyAppointment = () => {
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.patient}</td>
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.appointmentDate}</td>
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>{booking.slot}</td>
-                                <td className='dark:bg-gray-700 border-1 border-black text-center font-bold'>{booking?.price ? booking.price + ' Taka' : ''}</td>
+                                <td className='dark:bg-gray-700 border-1 border-black text-center font-bold'>{booking?.price ? booking.price + ' Taka' : 'Not Added'}</td>
 
                                 <td className='dark:bg-gray-700 border-1 border-black text-center'>
                                     {

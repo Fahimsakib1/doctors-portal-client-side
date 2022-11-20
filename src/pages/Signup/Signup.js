@@ -6,6 +6,9 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
 import useToken from '../../Hooks/useToken';
+import SmallSpinner from '../../components/SmallSpinner/SmallSpinner';
+
+
 
 const Signup = () => {
 
@@ -26,6 +29,9 @@ const Signup = () => {
     if (token) {
         navigate('/')
     }
+
+
+
 
 
 
@@ -90,7 +96,11 @@ const Signup = () => {
                 //navigate('/login')
 
             })
-            .catch(error => setError(error.message))
+            .catch(error => {
+                toast.error(error.message)
+                setError(error.message)
+                setLoading(false);
+            })
     }
 
 
@@ -112,7 +122,8 @@ const Signup = () => {
                     console.log('Save user Info to database from Signup Page', data);
 
                     toast.success('User Added to Database')
-                    //getUserToken(email)
+
+                    //set the token to the local Storage
                     setCreatedUserEmail(email)
                 }
                 else {
@@ -129,8 +140,7 @@ const Signup = () => {
     }
 
 
-
-    //user token from client side
+    //user token from client side. Ei Function tai useToken.js er moddhe likha hoicehe
     // const getUserToken = (email) => {
     //     fetch(`http://localhost:5000/jwt?email=${email}`)
     //     .then(res => res.json())
@@ -239,9 +249,15 @@ const Signup = () => {
                         error && <p className='text-red-600'>{error}</p>
                     }
 
-                    <input type="submit"
+                    {/* <input type="submit"
                         value='Sign up'
-                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' />
+                        className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600' /> */}
+
+                    <button type='submit' className='btn btn-accent w-full text-white uppercase py-3 rounded-md dark:bg-black dark:border-2 dark:border-green-600'>
+                        
+                        {loading ? <SmallSpinner></SmallSpinner> : 'Sign up'}
+                    
+                    </button>
                 </form>
 
                 <div className='mt-3'>
