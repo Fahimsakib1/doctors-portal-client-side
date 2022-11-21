@@ -23,7 +23,7 @@ const ManageDoctors = () => {
         queryKey: ['doctors'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/doctors', {
+                const res = await fetch('https://doctors-portal-server-taupe.vercel.app/doctors', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('doctorsPortalToken')}`
                     }
@@ -46,7 +46,7 @@ const ManageDoctors = () => {
     const handleDeleteDoctor = (id, name) => {
         
         //alert(`Deleting ${name} with ID: ${id}`)
-        fetch(`http://localhost:5000/doctors/${id}`, {
+        fetch(`https://doctors-portal-server-taupe.vercel.app/doctors/${id}`, {
             method: 'DELETE',
             headers: {
                   //headers er moddhe authorization token dicchi karon server side theke verifyAdmin ei function use korbo and check korbo j login kora user ta admin ki na.
@@ -140,6 +140,7 @@ const ManageDoctors = () => {
                                         </label>
 
                                     </td>
+
                                 </tr>)
 
                         }
@@ -148,6 +149,7 @@ const ManageDoctors = () => {
                     </tbody>
 
                 </table>
+
             </div>
             {
                 deletingDoctor && <ConfirmationModal deletingDoctor = {deletingDoctor} 

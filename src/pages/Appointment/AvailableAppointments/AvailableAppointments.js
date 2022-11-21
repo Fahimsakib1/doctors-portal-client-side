@@ -19,7 +19,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     //getting all the appointment option data from database through server by react query
     const {data : appointmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['appointmentOptions', date],
-        queryFn: () => fetch(`http://localhost:5000/appointmentOptions?date=${date}`)
+        queryFn: () => fetch(`https://doctors-portal-server-taupe.vercel.app/appointmentOptions?date=${date}`)
         .then(res => res.json())
     })
 
@@ -32,7 +32,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     // const {data: appointmentOptions = [] } = useQuery({
     //     queryKey: ['appointmentOptions'],
     //     queryFn: async() => {
-    //         const res = await fetch('http://localhost:5000/appointmentOptions')
+    //         const res = await fetch('https://doctors-portal-server-taupe.vercel.app/appointmentOptions')
     //         const data = await res.json()
     //         return data;
     //     }
@@ -41,7 +41,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     
     //getting all the appointment option data from database through server by fetching
     // useEffect(() => {
-    //     fetch('http://localhost:5000/appointmentOptions')
+    //     fetch('https://doctors-portal-server-taupe.vercel.app/appointmentOptions')
     //         .then(res => res.json())
     //         .then(data => setAppointmentOptions(data))
     // }, [])

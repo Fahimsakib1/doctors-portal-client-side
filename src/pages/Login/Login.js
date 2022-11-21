@@ -61,7 +61,7 @@ const Login = () => {
                 //     email: user?.email
                 // }
                 // //get jwt token in client side
-                // fetch('http://localhost:5000/jwt', {
+                // fetch('https://doctors-portal-server-taupe.vercel.app/jwt', {
                 //     method: 'POST',
                 //     headers: {
                 //         'content-type': 'application/json'
@@ -106,7 +106,7 @@ const Login = () => {
                     email: user?.email
                 }
                 //get jwt token in client side
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://doctors-portal-server-taupe.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -166,7 +166,7 @@ const Login = () => {
     
     // const tokenForGoogleSignIn = (email) => {
         
-    //     fetch('http://localhost:5000/jwt', {
+    //     fetch('https://doctors-portal-server-taupe.vercel.app/jwt', {
     //         method: 'POST',
     //         headers: {
     //             'content-type': 'application/json'

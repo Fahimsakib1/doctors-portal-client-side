@@ -11,6 +11,7 @@ import Payment from "../../pages/Dashboard/Payment/Payment";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login";
+import Review from "../../pages/Review/Review";
 import Signup from "../../pages/Signup/Signup";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -43,6 +44,12 @@ const routes = createBrowserRouter ([
                 path: '/signup',
                 element: <Signup></Signup>
             },
+
+            {
+                path: '/review',
+                element: <Review></Review>
+            },
+            
         ]
     },
 
@@ -75,8 +82,8 @@ const routes = createBrowserRouter ([
 
             {
                 path: '/dashboard/payment/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`),
-                element: <AdminRoute><Payment></Payment></AdminRoute>
+                loader: ({params}) => fetch(`https://doctors-portal-server-taupe.vercel.app/bookings/${params.id}`),
+                element: <Payment></Payment>
             }
         ]
     }

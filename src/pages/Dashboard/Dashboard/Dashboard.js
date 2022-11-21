@@ -9,7 +9,7 @@ const Dashboard = () => {
     const [appointments, setAppointments] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings?email=${user?.email}`)
+        fetch(`https://doctors-portal-server-taupe.vercel.app/bookings?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setAppointments(data))
     }, [user?.email])

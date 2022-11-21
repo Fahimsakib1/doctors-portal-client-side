@@ -33,7 +33,7 @@ const Navbar = () => {
 
         <li className='dark:text-white dark:hover:text-orange-500'><Link to='/'>Home</Link></li>
         <li className='dark:text-white dark:hover:text-orange-500'><Link to='/appointment'>Appointment</Link></li>
-        <li className='dark:text-white dark:hover:text-orange-500'><Link to='/about'>About Us</Link></li>
+        <li className='dark:text-white dark:hover:text-orange-500'><Link to='/review'>Review</Link></li>
 
         {
             user?.uid ?

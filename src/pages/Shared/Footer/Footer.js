@@ -8,7 +8,7 @@ const Footer = () => {
     const year = date.getFullYear();
     
     return (
-        <footer className=" mt-24 " style={{
+        <footer className=" mt-64 " style={{
             background: `url(${footerimg})`,
             backgroundSize: 'cover',
             backgroundPosition: "center"

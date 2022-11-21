@@ -41,7 +41,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
         
         console.log("Booking modal data from booking Page", booking);
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://doctors-portal-server-taupe.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

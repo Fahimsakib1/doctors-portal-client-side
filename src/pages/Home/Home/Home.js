@@ -9,6 +9,7 @@ import InfoCards from '../InfoCards/InfoCards';
 import MakeAppointment from '../MakeAppointment/MakeAppointment';
 import FeedbackCards from '../PatientSaying/FeedbackCards';
 import ServiceCards from '../Services/ServiceCards'; 
+import ShowReviews from '../ShowReviews/ShowReviews';
 
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
             <MakeAppointment></MakeAppointment>
             <FeedbackCards></FeedbackCards>
             <ContactUsForm></ContactUsForm>
+            <ShowReviews></ShowReviews>
         </div>
     );
 };

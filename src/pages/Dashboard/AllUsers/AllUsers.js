@@ -8,13 +8,13 @@ const AllUsers = () => {
     // used react query to load the registered users
     // const { data: users = [], refetch } = useQuery({
     //     queryKey: ['users'],
-    //     queryFn: () => fetch('http://localhost:5000/users')
+    //     queryFn: () => fetch('https://doctors-portal-server-taupe.vercel.app/users')
     //         .then(res => res.json())
     // })
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch('http://localhost:5000/users', {
+        queryFn: () => fetch('https://doctors-portal-server-taupe.vercel.app/users', {
             headers: {
                 authorization: `bearer ${localStorage.getItem('doctorsPortalToken')}`
             }
@@ -25,7 +25,7 @@ const AllUsers = () => {
     
 
     const handleMakeAdmin = (id) => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://doctors-portal-server-taupe.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('doctorsPortalToken')}`
