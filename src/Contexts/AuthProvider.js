@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
             
         }
 
-
+         //get the theme value from Local Storage
         const storedTheme = localStorage.getItem('defaultTheme');
         setTheme(storedTheme);
 
@@ -103,7 +103,7 @@ const AuthProvider = ({ children }) => {
     );
 };
 
-export default AuthProvider;
+export default AuthProvider; 
 
 
 
