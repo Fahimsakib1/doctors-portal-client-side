@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
-import { MdOutlineWavingHand } from 'react-icons/md'
+import { MdOutlineWavingHand } from 'react-icons/md';
+import {BsSun, BsMoon} from 'react-icons/bs';
 
 const Navbar = () => {
 
@@ -26,6 +27,8 @@ const Navbar = () => {
         ThemeChange();
         //setTheme(null)
     }
+
+
 
 
 
@@ -59,7 +62,14 @@ const Navbar = () => {
                 </>
         }
 
-        <input onClick={handleThemeSwitch} type="checkbox" className="toggle toggle-md my-auto ml-4 sm:mt-2 md:mt-2 mt-2 bg-black" title={theme === "dark" ? 'Light Mode' : 'Dark Mode'} />
+        {/* <input onClick={handleThemeSwitch} type="checkbox" className="toggle toggle-md my-auto ml-4 sm:mt-2 md:mt-2 mt-2 bg-black" title={theme === "dark" ? 'Click For Light Mode' : 'Click For Dark Mode'} /> */}
+
+        {
+            theme === 'dark' ?
+            <BsMoon onClick={handleThemeSwitch} className=" my-auto ml-8 mr-8 sm:mt-3 md:mt-3 mt-3 text-2xl mb-4 sm:mb-4 md:mb-4 lg:mb-0" title='Click For Light Mode' ></BsMoon>
+            :
+            <BsSun onClick={handleThemeSwitch} className=" my-auto ml-4 sm:mt-3 md:mt-3 mt-3 text-2xl mb-4 sm:mb-4 md:mb-4 lg:mb-0" title='Click For Dark Mode'></BsSun>
+        }
 
     </React.Fragment>
 
@@ -79,7 +89,7 @@ const Navbar = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost normal-case text-xl dark:text-green-600 mt-6" href='/'>Doctors Portal</Link>
+                    <Link to='/' className="btn btn-ghost normal-case text-2xl text-blue-800 dark:text-green-600 mt-6" href='/'>Doctors Portal</Link>
                 </div>
 
 
