@@ -49,30 +49,28 @@ const AuthProvider = ({ children }) => {
     }
 
     
-    //code for toggle theme
+    //code for toggle theme starts
     const [theme, setTheme] = useState("Light");
 
     useEffect( () => {
         if(theme === "dark"){
             document.documentElement.classList.add("dark")
-            
         }
         else{
             document.documentElement.classList.remove("dark")
-            
             
         }
     }, [theme])
 
     const ThemeChange = () => {
-        setTheme(theme === "dark" ? "Light" : "dark")
+        setTheme(theme === "dark" ? "Light" : "dark");
+        
     }
-
 
     const handleThemeSwitch = () => {
         ThemeChange()
     }
-
+    //code for toggle theme ends
 
 
 
@@ -86,7 +84,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const AuthInfo = { user, loading, setLoading, createUser, userLogin, signOutUser, updateUser, googleSignIn, resetPassword, theme, ThemeChange, handleThemeSwitch }
+    const AuthInfo = { user, loading, setLoading, createUser, userLogin, signOutUser, updateUser, googleSignIn, resetPassword, theme, ThemeChange, handleThemeSwitch}
 
     return (
         <AuthContext.Provider value={AuthInfo}>
