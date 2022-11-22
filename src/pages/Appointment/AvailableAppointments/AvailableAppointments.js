@@ -46,7 +46,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     //         .then(data => setAppointmentOptions(data))
     // }, [])
 
-
+    
 
     return (
         <section className='mt-24'>

@@ -198,6 +198,7 @@ const Signup = () => {
 
 
     return (
+        
         <div className='mt-8 flex justify-center items-center'>
             <div className='w-96 p-6 border-2 rounded-xl dark:bg-gray-900'>
                 <h2 className='text-2xl text-center mb-4 font-bold uppercase'>Sign up</h2>

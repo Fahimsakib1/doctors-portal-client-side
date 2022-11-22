@@ -26,3 +26,4 @@ const useToken = (email) => {
 }
 
 export default useToken;
+
