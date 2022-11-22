@@ -70,9 +70,9 @@ const Navbar = () => {
 
         {
             theme === 'dark' ?
-                <BsMoon onClick={handleThemeSwitch} className=" my-auto ml-8 mr-8 sm:mt-2 md:mt-2 mt-2 text-3xl mb-4 sm:mb-4 md:mb-4 lg:mb-0" title='Click For Light Mode' ></BsMoon>
+                <BsMoon onClick={handleThemeSwitch} className=" my-auto ml-8 mr-8 sm:mt-3 md:mt-3 lg:mt-2 mt-2 text-3xl mb-4 sm:mb-4 md:mb-4 lg:mb-0" title='Click For Light Mode' ></BsMoon>
                 :
-                <BsSun onClick={handleThemeSwitch} className=" my-auto ml-4 sm:mt-2 md:mt-2 mt-2 text-3xl mb-4 sm:mb-4 md:mb-4 lg:mb-0" title='Click For Dark Mode'></BsSun>
+                <BsSun onClick={handleThemeSwitch} className=" my-auto ml-4 sm:mt-3 md:mt-3 lg:mt-2 mt-2 text-3xl mb-4 sm:mb-4 md:mb-4 lg:mb-0" title='Click For Dark Mode'></BsSun>
         }
 
     </React.Fragment>
