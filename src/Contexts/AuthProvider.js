@@ -60,10 +60,20 @@ const AuthProvider = ({ children }) => {
             document.documentElement.classList.remove("dark")
             
         }
+
+
+        const storedTheme = localStorage.getItem('defaultTheme');
+        setTheme(storedTheme);
+
+
+
     }, [theme])
 
     const ThemeChange = () => {
         setTheme(theme === "dark" ? "Light" : "dark");
+
+        //set the theme value to Local Storage
+        localStorage.setItem('defaultTheme', theme === "dark" ? "Light" : "dark" )
         
     }
 
@@ -94,4 +104,7 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+
+
 

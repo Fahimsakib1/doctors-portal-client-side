@@ -8,7 +8,7 @@ const DoctorInfoModal = ({ doctorInfo }) => {
         <div>
             <input type="checkbox" id="doctorInfo-modal" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box relative mx-auto text-center">
+                <div className="modal-box relative mx-auto text-center dark:text-black">
                     <label htmlFor="doctorInfo-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div className="avatar">
                         <div className="w-64 rounded-lg">

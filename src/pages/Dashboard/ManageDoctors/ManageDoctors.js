@@ -157,7 +157,7 @@ const ManageDoctors = () => {
                 handleDeleteDoctor = {handleDeleteDoctor}
                 ></ConfirmationModal>
             }
-        </div>
+        </div> 
     );
 };
 

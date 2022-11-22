@@ -42,7 +42,7 @@ const ConfirmationModal = ({ deletingDoctor, closeModal, handleDeleteDoctor }) =
             {
                 doctorInfo && <DoctorInfoModal doctorInfo = {doctorInfo}></DoctorInfoModal>
             }
-        </div>
+        </div> 
     );
 };
 
